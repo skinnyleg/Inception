@@ -8,3 +8,13 @@ services:
       - "80:80"
     volumes:
       - "/Users/hmoubal/Desktop/inception/srcs/requirements/nginx/conf:/etc/nginx/http.d"
+      # - "/Users/hmoubal/Desktop/inception/srcs/requirements/wordpress/data:/etc/nginx/html"
+    depends_on:
+      - wordpress
+  wordpress:
+    image: wordpress
+    build: ./requirements/wordpress
+    container_name: wp
+    volumes:
+      - "/Users/hmoubal/Desktop/inception/srcs/requirements/wordpress/data:/var/www/html"
+    

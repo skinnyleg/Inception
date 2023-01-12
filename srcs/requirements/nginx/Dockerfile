@@ -1,3 +1,3 @@
-FROM alpine:3.16
-RUN	apk update && apk upgrade && apk add --no-cache nginx
+FROM debian:buster
+RUN	apt-get update && apt-get upgrade -y && apt-get install nginx -y
 CMD ["nginx", "-g", "daemon off;"]
