@@ -1,11 +1,8 @@
 
 
 
-up:
-	cd srcs && docker-compose up -d
-
-docker-build:
-	cd srcs && docker-compose up --build
+up: 
+	cd srcs && docker-compose up --build -d
 
 down:
 	cd srcs && docker-compose down
@@ -16,3 +13,6 @@ clean:
 
 fclean : clean
 	docker rmi $(shell docker images -a -q)
+
+del :
+	docker system prune -a

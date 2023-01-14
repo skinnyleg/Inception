@@ -8,4 +8,4 @@ RUN cd /var/www/html
 RUN mv wordpress/* ./
 RUN rm -f latest.tar.gz
 
-# CMD [ "tail", "-f" ]
+# CMD [ "sleep", "100000" ]

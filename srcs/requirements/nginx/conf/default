@@ -1,0 +1,22 @@
+
+# server {
+#     listen 80;
+#     server_name hmoubal.42.fr;
+#     return 301 https://$server_name$request_uri;
+# }
+
+server {
+    listen 443 ssl;
+    server_name hmoubal.42.fr;
+
+    ssl_certificate /etc/nginx/hmoubal.42.fr.crt;
+    ssl_certificate_key /etc/nginx/hmoubal.42.fr.key;
+
+    location / {
+        # root /var/www/example.com;
+        # root    /var/www/html;
+        root    /etc/nginx/sites-available;
+        index index.html;
+        # index index.nginx-debian.html;
+    }
+}
