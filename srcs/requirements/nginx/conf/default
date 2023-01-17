@@ -1,13 +1,6 @@
-
-# server {
-#     listen 80;
-#     server_name hmoubal.42.fr;
-#     return 301 https://$server_name$request_uri;
-# }
-
 server {
     listen 443 ssl;
-    server_name hmoubal.42.fr;
+    server_name hmoubal.com www.hmoubal.com;
 
     ssl_certificate /etc/nginx/hmoubal.42.fr.crt;
     ssl_certificate_key /etc/nginx/hmoubal.42.fr.key;

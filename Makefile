@@ -4,6 +4,8 @@
 up: 
 	cd srcs && docker-compose up --build -d
 
+mariadb:
+	cd srcs && docker-compose up --build -d && docker-compose exec mariadb bash
 down:
 	cd srcs && docker-compose down
 

@@ -1,13 +1,13 @@
 version: '3'
 services:
-  nginx:
-    image: nginx
-    build: ./requirements/nginx
-    container_name: ngi
-    ports:
-      - "443:443"
-    volumes:
-      - "/Users/hmoubal/Desktop/inception/srcs/requirements/nginx/conf:/etc/nginx/sites-available"
+  # nginx:
+  #   image: nginx
+  #   build: ./requirements/nginx
+  #   container_name: ngi
+  #   ports:
+  #     - "443:443"
+  #   volumes:
+  #     - "/Users/hmoubal/Desktop/inception/srcs/requirements/nginx/conf:/etc/nginx/sites-available"
       # - "/Users/hmoubal/Desktop/inception/srcs/requirements/wordpress/data:/etc/nginx/html"
     # depends_on:
       # - wordpress
@@ -17,4 +17,12 @@ services:
   #   container_name: wp
   #   volumes:
   #     - "/Users/hmoubal/Desktop/inception/srcs/requirements/wordpress/data:/var/www/html"
+  mariadb:
+    image: idb
+    build:
+      context: ./
+      dockerfile: ./requirements/mariadb/Dockerfile
+    container_name: cdb
+    env_file:
+      - ./.env
     
