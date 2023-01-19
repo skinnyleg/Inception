@@ -1,28 +1,61 @@
 version: '3'
 services:
-  # nginx:
-  #   image: nginx
-  #   build: ./requirements/nginx
-  #   container_name: ngi
-  #   ports:
-  #     - "443:443"
-  #   volumes:
-  #     - "/Users/hmoubal/Desktop/inception/srcs/requirements/nginx/conf:/etc/nginx/sites-available"
-      # - "/Users/hmoubal/Desktop/inception/srcs/requirements/wordpress/data:/etc/nginx/html"
-    # depends_on:
-      # - wordpress
-  # wordpress:
-  #   image: wordpress
-  #   build: ./requirements/wordpress
-  #   container_name: wp
-  #   volumes:
-  #     - "/Users/hmoubal/Desktop/inception/srcs/requirements/wordpress/data:/var/www/html"
+
+
+  nginx:
+    image: nginx
+    build: ./requirements/nginx
+    container_name: ngi
+    ports:
+      - "80:443"
+    restart: always
+    networks:
+      - nginx-word
+    depends_on:
+      - wordpress
+    volumes:
+      - "/Users/hmoubal/Desktop/inception/srcs/requirements/nginx/conf:/etc/nginx/sites-available"
+
+
+
+
+  wordpress:
+    image: wordpress
+    build:
+      context: ./
+      dockerfile: ./requirements/wordpress/Dockerfile
+    container_name: wp
+    networks:
+      - db-word
+      - nginx-word
+    restart: always
+    env_file:
+      - ./.env
+    depends_on:
+      - mariadb 
+    # volumes:
+    #   - "/Users/hmoubal/Desktop/inception/srcs/requirements/wordpress/data:/var/www/html"
+
+
+
   mariadb:
-    image: idb
+    image: mariadb 
     build:
       context: ./
       dockerfile: ./requirements/mariadb/Dockerfile
-    container_name: cdb
+    container_name: db
     env_file:
       - ./.env
-    
+    networks:
+      - db-word
+    restart: always
+    # volumes:
+    #   - "Users/hmoubal/Desktop/inception/srcs/requirements/mariadb/conf:/etc/mysql/conf.d"
+
+
+
+networks:
+  db-word:
+    driver: bridge    
+  nginx-word:
+    driver: bridge    

@@ -5,6 +5,13 @@ server {
     ssl_certificate /etc/nginx/hmoubal.42.fr.crt;
     ssl_certificate_key /etc/nginx/hmoubal.42.fr.key;
 
+    location ~ \.php$ {
+        fastcgi_pass wordpress:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
     location / {
         # root /var/www/example.com;
         # root    /var/www/html;
