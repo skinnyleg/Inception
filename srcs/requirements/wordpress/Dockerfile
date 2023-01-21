@@ -14,16 +14,20 @@ RUN rm -f latest.tar.gz
 
 RUN mkdir -p /var/www/html
 
-RUN mv wordpress /var/www/html/myblog
+RUN mv wordpress/* /var/www/html
 
-WORKDIR /var/www/html/myblog
+WORKDIR /var/www/html
 
 RUN cp wp-config-sample.php wp-config.php
 
 COPY /requirements/wordpress/script.sh .
 
+COPY ./.env .
+
 # COPY . .
 
 RUN chmod +x script.sh
 
-# CMD [ "sleep", "100000" ]
+RUN ./script.sh
+
+CMD [ "/usr/sbin/php-fpm7.3", "-F"]

@@ -14,9 +14,8 @@ sed -i 's/username_here/'$DB_USER'/g' wp-config.php
 
 sed -i 's/password_here/'$DB_PASS'/g' wp-config.php
 
-service php7.3-fpm start
+sed -i 's/localhost/db/1' wp-config.php
 
-sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 0.0.0.0:9000/g' /etc/php/<version>/fpm/pool.d/www.conf
+sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 0.0.0.0:9000/g' /etc/php/7.3/fpm/pool.d/www.conf
 
-service php7.3-fpm restart
-
+mkdir -p /run/php

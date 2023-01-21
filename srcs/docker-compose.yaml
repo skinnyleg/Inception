@@ -10,11 +10,12 @@ services:
       - "80:443"
     restart: always
     networks:
-      - nginx-word
+      - mynetwork
     depends_on:
       - wordpress
     volumes:
       - "/Users/hmoubal/Desktop/inception/srcs/requirements/nginx/conf:/etc/nginx/sites-available"
+      - data:/var/www/html
 
 
 
@@ -26,15 +27,14 @@ services:
       dockerfile: ./requirements/wordpress/Dockerfile
     container_name: wp
     networks:
-      - db-word
-      - nginx-word
+      - mynetwork
     restart: always
     env_file:
       - ./.env
     depends_on:
       - mariadb 
-    # volumes:
-    #   - "/Users/hmoubal/Desktop/inception/srcs/requirements/wordpress/data:/var/www/html"
+    volumes:
+      - data:/var/www/html
 
 
 
@@ -47,7 +47,7 @@ services:
     env_file:
       - ./.env
     networks:
-      - db-word
+      - mynetwork
     restart: always
     # volumes:
     #   - "Users/hmoubal/Desktop/inception/srcs/requirements/mariadb/conf:/etc/mysql/conf.d"
@@ -55,7 +55,8 @@ services:
 
 
 networks:
-  db-word:
+  mynetwork:
     driver: bridge    
-  nginx-word:
-    driver: bridge    
+
+volumes:
+  data:
