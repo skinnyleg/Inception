@@ -49,8 +49,8 @@ services:
     networks:
       - mynetwork
     restart: always
-    # volumes:
-    #   - "Users/hmoubal/Desktop/inception/srcs/requirements/mariadb/conf:/etc/mysql/conf.d"
+    volumes:
+      - db_data:/var/lib/mysql
 
 
 
@@ -60,3 +60,4 @@ networks:
 
 volumes:
   data:
+  db_data:

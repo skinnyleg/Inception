@@ -4,6 +4,18 @@ awk '{print "export "$0""}' .env > env.txt
 
 source env.txt
 
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+
+chmod +x wp-cli.phar
+
+mv wp-cli.phar /usr/local/bin/wp
+
+wp cli update
+
+cd /var/www/html
+
+cp wp-config-sample.php wp-config.php
+
 DB_NAME=$DBNAME
 DB_USER=$MYSQL_USER
 DB_PASS=$MYSQL_PASSWORD

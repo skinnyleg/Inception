@@ -9,19 +9,36 @@ NAMEDB=$DBNAME
 USER=$MYSQL_USER
 USERPASS=$MYSQL_PASSWORD
 
-apt-get -y install expect
-
-# service mysql start
+# apt-get -y install expect
 
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf
 
-service mysql restart
+service mysql start
 
 mysql -u root -e "CREATE DATABASE $NAMEDB;"
-mysql -u root -e "CREATE USER '$USER'@localhost IDENTIFIED BY '$USERPASS';"
-mysql -u root -e "GRANT ALL PRIVILEGES ON $NAMEDB.* TO '$USER'@localhost;"
+mysql -u root -e "CREATE USER '$USER'@'%' IDENTIFIED BY '$USERPASS';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON $NAMEDB.* TO '$USER'@'%';"
+mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$ROOT_PASSWORD';"
 mysql -u root -e "FLUSH PRIVILEGES;"
-# mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$ROOT_PASSWORD';"
+
+service mysql stop
+
+service mysql start
+# service mysql start
+
+# echo "CREATE DATABASE IF NOT EXISTS $NAMEDB ;" > db1.sql
+# echo "CREATE USER IF NOT EXISTS '$USER'@'%' IDENTIFIED BY '$USERPASS' ;" >> db1.sql
+# echo "GRANT ALL PRIVILEGES ON $NAMEDB.* TO '$USER'@'%' ;" >> db1.sql
+# echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$ROOT_PASSWORD' ;" >> db1.sql
+# echo "FLUSH PRIVILEGES;" >> db1.sql
+
+# mysql < db1.sql
+
+# service mysql restart
+# service mysql stop
+
+# mysqld
+
 
 # expect -c "
 # spawn mysql_secure_installation
