@@ -18,12 +18,12 @@ service mysql start
 mysql -u root -e "CREATE DATABASE $NAMEDB;"
 mysql -u root -e "CREATE USER '$USER'@'%' IDENTIFIED BY '$USERPASS';"
 mysql -u root -e "GRANT ALL PRIVILEGES ON $NAMEDB.* TO '$USER'@'%';"
-mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$ROOT_PASSWORD';"
+# mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$ROOT_PASSWORD';"
 mysql -u root -e "FLUSH PRIVILEGES;"
 
 service mysql stop
-
 service mysql start
+
 # service mysql start
 
 # echo "CREATE DATABASE IF NOT EXISTS $NAMEDB ;" > db1.sql

@@ -5,7 +5,7 @@ services:
   nginx:
     image: nginx
     build: ./requirements/nginx
-    container_name: ngi
+    container_name: nginx
     ports:
       - "80:443"
     restart: always
@@ -25,7 +25,7 @@ services:
     build:
       context: ./
       dockerfile: ./requirements/wordpress/Dockerfile
-    container_name: wp
+    container_name: wordpress
     networks:
       - mynetwork
     restart: always
@@ -43,7 +43,7 @@ services:
     build:
       context: ./
       dockerfile: ./requirements/mariadb/Dockerfile
-    container_name: db
+    container_name: mariadb
     env_file:
       - ./.env
     networks:
