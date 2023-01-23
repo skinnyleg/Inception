@@ -7,15 +7,15 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     ports:
-      - "80:443"
+      - "443:443"
     restart: always
     networks:
       - mynetwork
     depends_on:
-      - wordpress
+      - mariadb
     volumes:
       - "/Users/hmoubal/Desktop/inception/srcs/requirements/nginx/conf:/etc/nginx/sites-available"
-      - data:/var/www/html
+      - wp:/var/www/html
 
 
 
@@ -33,8 +33,9 @@ services:
       - ./.env
     depends_on:
       - mariadb 
+      - nginx
     volumes:
-      - data:/var/www/html
+      - wp:/var/www/html
 
 
 
@@ -50,7 +51,7 @@ services:
       - mynetwork
     restart: always
     volumes:
-      - db_data:/var/lib/mysql
+      - db:/var/lib/mysql
 
 
 
@@ -59,5 +60,13 @@ networks:
     driver: bridge    
 
 volumes:
-  data:
-  db_data:
+  wp:
+    driver_opts:
+      device: /Users/hmoubal/Desktop/inception/wordpress
+      o: bind
+      type: none
+  db:
+    driver_opts:
+      device: /Users/hmoubal/Desktop/inception/mariadb
+      o: bind
+      type: none

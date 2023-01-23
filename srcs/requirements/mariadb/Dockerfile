@@ -10,7 +10,4 @@ COPY /requirements/mariadb/tools/script.sh .
 
 RUN chmod +x script.sh
 
-RUN ./script.sh
-
-CMD [ "mysqld_safe" ]
-# CMD [ "./script.sh" ]
+CMD [ "./script.sh" ]
