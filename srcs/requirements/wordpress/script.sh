@@ -36,4 +36,6 @@ wp config set DB_PASSWORD $MYSQL_PASSWORD --type=constant --allow-root
 
 wp core install --url=localhost --title="My WordPress Site" --admin_user=skinnyleg --admin_password=haitam123 --admin_email=haitam123@gmail.com --skip-email --allow-root
 
+wp user create med-doba med-doba123@gmail.com --role=subscriber --user_pass=med-doba123 --allow-root
+
 /usr/sbin/php-fpm7.3 -F

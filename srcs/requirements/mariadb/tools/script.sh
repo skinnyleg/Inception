@@ -19,11 +19,6 @@ mysql -u root -e "GRANT ALL PRIVILEGES ON $NAMEDB.* TO '$USER'@'%';"
 mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$ROOT_PASSWORD';"
 mysql -u root -e "FLUSH PRIVILEGES;"
 
-service mysql stop
-service mysql start
-
-mysqld
-
 kill $(cat /var/run/mysqld/mysqld.pid)
 
 mysqld

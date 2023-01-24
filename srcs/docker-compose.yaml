@@ -33,7 +33,6 @@ services:
       - ./.env
     depends_on:
       - mariadb 
-      - nginx
     volumes:
       - wp:/var/www/html
 

@@ -1,12 +1,8 @@
 
 up: 
-	mkdir wordpress
-	mkdir mariadb
 	cd srcs && docker-compose up --build -d
 
 down:
-	rm -rf wordpress
-	rm -rf mariadb
 	cd srcs && docker-compose down
 
 re: down up
@@ -20,4 +16,4 @@ fclean : clean
 del :
 	cd srcs && docker-compose down && docker system prune -f
 	docker volume rm $(shell docker volume ls -q)
-	# docker network rm $(shell docker network ls -q) 2>/dev/null
+	docker rmi $(shell docker images -q) 2>/dev/null
