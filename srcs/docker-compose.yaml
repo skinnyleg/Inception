@@ -53,6 +53,16 @@ services:
       - db:/var/lib/mysql
 
 
+  redis:
+    image: redis
+    build:
+      context: ./
+      dockerfile: ./requirements/bonus/redis/Dockerfile
+    container_name: redis
+    restart: always
+    networks:
+      - mynetwork
+
 
 networks:
   mynetwork:
