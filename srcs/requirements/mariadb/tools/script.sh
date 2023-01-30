@@ -1,9 +1,5 @@
 #!/bin/bash
 
-awk '{print "export "$0""}' .env > env.txt
-
-source env.txt
-
 ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
 NAMEDB=$DBNAME
 USER=$MYSQL_USER

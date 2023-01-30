@@ -8,6 +8,4 @@ RUN apt-get install -y php-fpm php-cli php-common php-curl php-gd php-json php-m
 
 COPY /requirements/wordpress/script.sh .
 
-COPY ./.env .
-
 CMD [ "./script.sh" ]

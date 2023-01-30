@@ -33,6 +33,7 @@ services:
       - ./.env
     depends_on:
       - mariadb 
+      - redis
     volumes:
       - wp:/var/www/html
 
@@ -63,6 +64,17 @@ services:
     networks:
       - mynetwork
 
+  adminer:
+    image: adminer
+    build:
+      context: ./
+      dockerfile: ./requirements/bonus/adminer/Dockerfile
+    container_name: adminer
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - mynetwork
 
 networks:
   mynetwork:
