@@ -16,3 +16,17 @@ server {
         include fastcgi_params;
     }
 }
+
+server {
+    listen 80;
+
+    root /var/www/adminer;
+    index index.php;
+
+    location ~ \.php$ {
+        fastcgi_pass adminer:100;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+}

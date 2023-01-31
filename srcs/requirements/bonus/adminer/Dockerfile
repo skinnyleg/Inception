@@ -2,15 +2,17 @@ FROM debian:buster
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     wget \
-    php
+    php-mysql \
+    php-fpm
 
-# RUN apt-get install -y supervisor
+RUN mkdir -p /var/www/adminer
 
-RUN mkdir -p /var/www/html
+RUN wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php -O /var/www/adminer/index.php
 
+RUN service php7.3-fpm start
 
-RUN wget https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php -O /var/www/html/adminer.php
+RUN sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 0.0.0.0:100/g' /etc/php/7.3/fpm/pool.d/www.conf
 
-WORKDIR /var/www/html
+RUN mkdir -p /run/php
 
-CMD ["php" , "-S", "0.0.0.0:8080"]
+CMD [ "/usr/sbin/php-fpm7.3" , "-F" ]

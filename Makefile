@@ -15,5 +15,4 @@ fclean : clean
 
 del :
 	cd srcs && docker-compose down && docker system prune -f
-	docker volume rm $(shell docker volume ls -q)
 	docker rmi $(shell docker images -q) 2>/dev/null

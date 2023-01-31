@@ -8,14 +8,17 @@ services:
     container_name: nginx
     ports:
       - "443:443"
+      - "8080:80"
     restart: always
     networks:
       - mynetwork
     depends_on:
       - mariadb
+      - adminer
     volumes:
       - "/Users/hmoubal/Desktop/inception/srcs/requirements/nginx/conf:/etc/nginx/sites-available"
       - wp:/var/www/html
+      - adminer:/var/www/adminer
 
 
 
@@ -70,11 +73,11 @@ services:
       context: ./
       dockerfile: ./requirements/bonus/adminer/Dockerfile
     container_name: adminer
-    ports:
-      - "8080:8080"
     restart: always
     networks:
       - mynetwork
+    volumes:
+      - adminer:/var/www/adminer
 
 networks:
   mynetwork:
@@ -89,5 +92,10 @@ volumes:
   db:
     driver_opts:
       device: /Users/hmoubal/Desktop/inception/mariadb
+      o: bind
+      type: none
+  adminer:
+    driver_opts:
+      device: /Users/hmoubal/Desktop/inception/adminer
       o: bind
       type: none
