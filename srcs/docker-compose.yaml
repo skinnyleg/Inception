@@ -79,6 +79,24 @@ services:
     volumes:
       - adminer:/var/www/adminer
 
+  ftp:
+    image: ftp
+    build:
+      context: ./
+      dockerfile: ./requirements/bonus/ftp/Dockerfile
+    container_name: ftp
+    restart: always
+    depends_on:
+      - wordpress
+    ports:
+      - "101:21"
+      - "102:20"
+    networks:
+      - mynetwork
+    volumes:
+      - wp:/var/www/html
+
+
 networks:
   mynetwork:
     driver: bridge    
