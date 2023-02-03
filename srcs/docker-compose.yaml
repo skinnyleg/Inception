@@ -89,12 +89,12 @@ services:
     depends_on:
       - wordpress
     ports:
-      - "101:21"
-      - "102:20"
+      - "20-21:20-21"
+      - "40000-40005:40000-40005"
     networks:
       - mynetwork
     volumes:
-      - wp:/var/www/html
+      - wp:/home/ftpuser/
 
 
 networks:

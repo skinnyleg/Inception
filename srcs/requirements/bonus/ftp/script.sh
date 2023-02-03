@@ -11,16 +11,23 @@ sed -i 's/listen=NO/listen=YES/g' vsftpd.conf
 sed -i 's/listen_ipv6=YES/listen_ipv6=NO/g' vsftpd.conf
 sed -i 's/#write_enable=YES/write_enable=YES/g' vsftpd.conf
 sed -i 's/#chroot_local_user=YES/chroot_local_user=YES/g' vsftpd.conf
-echo "listen_address=0.0.0.0" >> vsftpd.conf
 echo "userlist_deny=NO" >> vsftpd.conf
 echo "userlist_enable=YES" >> vsftpd.conf
 echo "userlist_file=/etc/vsftpd.userlist" >> vsftpd.conf
+echo "local_enable=YES" >> vsftpd.conf
+echo "allow_writeable_chroot=YES" >> vsftpd.conf
+echo "local_root=/home/$FTPUser/" >> vsftpd.conf
+echo "pasv_enable=YES" >> vsftpd.conf
+echo "pasv_min_port=40000" >> vsftpd.conf
+echo "pasv_max_port=40005" >> vsftpd.conf
 
-useradd -N $FTPUser
+groupadd $FTPUser
 
-echo "$FTPUser:$FTPpass" | passwd
+useradd $FTPUser -g $FTPUser
 
-chown $FTPUser:$FTPUser /var/www/html
+echo "$FTPUser:$FTPpass" | chpasswd
+
+chown $FTPUser:$FTPUser /home/$FTPUser/
 
 echo "$FTPUser" >> /etc/vsftpd.userlist
 
