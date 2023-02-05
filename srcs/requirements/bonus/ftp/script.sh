@@ -13,8 +13,8 @@ sed -i 's/#write_enable=YES/write_enable=YES/g' vsftpd.conf
 sed -i 's/#chroot_local_user=YES/chroot_local_user=YES/g' vsftpd.conf
 echo "userlist_deny=NO" >> vsftpd.conf
 echo "userlist_enable=YES" >> vsftpd.conf
-echo "userlist_file=/etc/vsftpd.userlist" >> vsftpd.conf
 echo "local_enable=YES" >> vsftpd.conf
+echo "userlist_file=/etc/vsftpd.userlist" >> vsftpd.conf
 echo "allow_writeable_chroot=YES" >> vsftpd.conf
 echo "local_root=/home/$FTPUser/" >> vsftpd.conf
 echo "pasv_enable=YES" >> vsftpd.conf
