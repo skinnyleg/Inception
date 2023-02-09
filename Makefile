@@ -13,6 +13,7 @@ clean:
 fclean : clean
 	docker rmi -f $(shell docker images -a -q)
 
-del :
-	cd srcs && docker-compose down && docker system prune -f
-	docker volume rm $(shell docker volume ls -q)
+del : down
+	@rm -rf wordpress website adminer mariadb
+	@docker system prune -af
+	@docker volume rm $(shell docker volume ls -q)
