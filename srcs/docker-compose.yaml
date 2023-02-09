@@ -96,6 +96,34 @@ services:
     volumes:
       - wp:/home/ftpuser/
 
+  flask:
+    image: flask
+    build:
+      context: ./
+      dockerfile: ./requirements/bonus/flask/Dockerfile
+    container_name: flask
+    restart: always
+    ports:
+      - "8081:8081"
+    depends_on:
+      - website
+    volumes:
+      - static-wp:/website/
+    networks:
+      - mynetwork
+
+
+  website:
+    image: website
+    build:
+      context: ./
+      dockerfile: ./requirements/bonus/website/Dockerfile
+    container_name: website
+    restart: always
+    volumes:
+      - static-wp:/website/
+    networks:
+      - mynetwork
 
 networks:
   mynetwork:
@@ -115,5 +143,10 @@ volumes:
   adminer:
     driver_opts:
       device: /Users/hmoubal/Desktop/inception/adminer
+      o: bind
+      type: none
+  static-wp:
+    driver_opts:
+      device: /Users/hmoubal/Desktop/inception/website
       o: bind
       type: none
