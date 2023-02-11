@@ -15,6 +15,4 @@ RUN chmod +x ./script.sh
 
 ENV FLASK_APP=app.py
 
-
-# CMD ["flask", "run", "--host=0.0.0.0", "--port=8081"]
 CMD ["./script.sh"]
