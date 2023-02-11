@@ -1,27 +1,23 @@
 
-up: 
-	@mkdir wordpress website adminer mariadb
-	cd srcs && docker-compose up --build -d
+up:
+	@-mkdir -p /home/hmoubal/data/wordpress /home/hmoubal/data/website /home/hmoubal/data/adminer /home/hmoubal/data/mariadb
+	cd srcs && sudo docker-compose up --build -d
 
 down:
-	cd srcs && docker-compose down
-
-down-cl:
-	cd srcs && docker-compose down
-	@rm -rf wordpress website adminer mariadb
-	@docker volume rm $(shell docker volume ls -q)
+	cd srcs && sudo docker-compose down
 
 re: down up
 
-recl: down-cl up
-
 clean:
-	docker rm -f $(shell docker ps -a -q)
+	sudo docker rm -f $(shell sudo docker ps -a -q)
 
 fclean : clean
-	docker rmi -f $(shell docker images -a -q)
+	sudo docker rmi -f $(shell sudo docker images -a -q)
+
+vol:
+	@sudo docker volume rm $(shell sudo docker volume ls -q)
 
 del : down
-	@rm -rf wordpress website adminer mariadb
-	@docker system prune -af
-	@docker volume rm $(shell docker volume ls -q)
+	@-rm -rf /home/hmoubal/data
+	@sudo docker system prune -af
+	@sudo docker volume rm $(shell sudo docker volume ls -q)

@@ -18,7 +18,7 @@ server {
 }
 
 server {
-    listen 80;
+    listen 8080;
 
     root /var/www/adminer;
     index index.php;
