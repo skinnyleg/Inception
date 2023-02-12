@@ -13,6 +13,4 @@ COPY ./requirements/bonus/flask/script.sh .
 
 RUN chmod +x ./script.sh
 
-ENV FLASK_APP=app.py
-
 CMD ["./script.sh"]
